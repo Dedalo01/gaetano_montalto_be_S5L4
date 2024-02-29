@@ -4,9 +4,9 @@
     {
         // Campi
         private int _id;
-        private double _price;
         private string _name;
-        private string _description;
+        private double _price;
+        private string? _description;
         //private List<string> _imageUrls = new List<string>(3);
         private string[] _imageUrls = new string[3];
         private string notFoundImg = "https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png";
@@ -25,7 +25,7 @@
         // Costruttori
 
         // inizializza un oggetto che ha già tutte e tre le img con un link di default
-        public Item(int id, double price, string name, string description)
+        public Item(int id, string name, double price, string description)
         {
             _id = id;
             _price = price;
@@ -36,13 +36,25 @@
         }
 
         // questo conviene rifarlo mettendo tutte e tre le stringhe come default oppure usando i metodi se l'utente le modifica
-        public Item(int id, double price, string name, string description, string[] imageUrls)
+        public Item(int id, string name, double price, string description, string[] imageUrls)
         {
             _id = id;
             _price = price;
             _name = name;
             _description = description;
             _imageUrls = imageUrls;
+        }
+
+        // costruttore per prendere dati da db
+        public Item(int id, string name, double price, string? description = null, string? imageMain = null, string? imageSecond = null, string? imageThird = null)
+        {
+            _id = id;
+            _price = price;
+            _name = name;
+            _description = description;
+            UpdateMainImage(imageMain);
+            UpdateSecondaryImage(imageSecond);
+            UpdateTertiaryImage(imageThird);
         }
 
         // Questo costruttore vuoto serve ad ASP.NET per creare una istanza del mio item per far bindare bene il Model!
@@ -59,19 +71,43 @@
 
         // Avendo solo 3 immagini, vado a modificarle una alla volta nella posizione specifica tramite metodi
         // forse potevo semplicemente fare un unico metodo e passargli anche l'id... 
-        public void UpdateMainImageUrl(string imageUrl)
+        public void UpdateMainImage(string imageUrl)
         {
-            _imageUrls[0] = imageUrl;
+            if (imageUrl == null)
+            {
+                _imageUrls[0] = "";
+
+            }
+            else
+            {
+                _imageUrls[0] = imageUrl;
+            }
         }
 
-        public void UpdateSecondaryImageUrl(string imageUrl)
+        public void UpdateSecondaryImage(string imageUrl)
         {
-            _imageUrls[1] = imageUrl;
+            if (imageUrl == null)
+            {
+                _imageUrls[1] = "";
+
+            }
+            else
+            {
+                _imageUrls[1] = imageUrl;
+            }
         }
 
-        public void UpdateTertiaryImageUrl(string imageUrl)
+        public void UpdateTertiaryImage(string imageUrl)
         {
-            _imageUrls[2] = imageUrl;
+            if (imageUrl == null)
+            {
+                _imageUrls[2] = "";
+
+            }
+            else
+            {
+                _imageUrls[2] = imageUrl;
+            }
         }
     }
 }

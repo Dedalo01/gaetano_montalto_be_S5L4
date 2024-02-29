@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Item
+
+<form asp-controller="Admin" asp-action="AddItem" method="post" enctype="multipart/form-data">
+    <label asp-for="@Model.Name"></label>
+    <input type="text" asp-for="@Model.Name" />
+    <br />
+    
+    <label asp-for="@Model.Price"></label>
+    <input type="text" asp-for="@Model.Price" />
+    <br />
+
+    <label asp-for="@Model.Description"></label>
+    <input type="text" asp-for="@Model.Description" />
+    <br />
+
+    <label for="formFile" class="form-label">Scegli una immagine</label>
+    <input class="form-control" type="file" id="formFile" name="image" />
+
+    <button class="btn btn-primary">Salva</button>
+
+
+</form>

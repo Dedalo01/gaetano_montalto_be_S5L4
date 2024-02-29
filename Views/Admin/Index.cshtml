@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "ADMIN PAGE";
 }
+
+
+
+
+<h1 class="display-4">ADMIN PAGE</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (Item item in Model)
+        {
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="/uploads/@item.ImageUrls[0]" class="card-img-top" alt="@item.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p>Id: @item.Id</p>
+                        @* <p class="card-text">@item.Description</p> *@
+                        @* <a class="btn btn-danger" asp-controller="Admin" asp-action="Delete" asp-route-id="@item.Id">Elimina</a> *@
+                        <a class="btn btn-warning" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id">Edita</a> 
+                        <a class="btn btn-info" asp-controller="Admin" asp-action="Details" asp-route-id="@item.Id">Dettagli</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <button asp-controller="Admin" asp-action="AddItem">Aggiungi</button>
+</div>
